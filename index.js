@@ -1,103 +1,123 @@
 <script type="text/javascript">
+// <![CDATA[
+var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+var sparkles=50;
 
-var colours=new Array('#f00', '#f06', '#f0f', '#f6f', '#f39', '#f9c');
-var minisize=16;
-var maxisize=28;
-var hearts=66;
-var over_or_under="over";
+/****************************
+*  Tinkerbell Magic Sparkle *
+*(c)2005-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
 var x=ox=400;
 var y=oy=300;
 var swide=800;
 var shigh=600;
 var sleft=sdown=0;
-var herz=new Array();
-var herzx=new Array();
-var herzy=new Array();
-var herzs=new Array();
-var kiss=false;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
 
-if (typeof('addRVLoadEvent')!='function') function addRVLoadEvent(funky) {
-  var oldonload=window.onload;
-  if (typeof(oldonload)!='function') window.onload=funky;
-  else window.onload=function() {
-    if (oldonload) oldonload();
-    funky();
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
   }
-}
-
-addRVLoadEvent(mwah);
-
-function mwah() { if (document.getElementById) {
-  var i, heart;
-  for (i=0; i<hearts; i++) {
-    heart=createDiv("auto", "auto");
-    heart.style.visibility="hidden";
-	heart.style.zIndex=(over_or_under=="over")?"1001":"0";
-    heart.style.color=colours[i%colours.length];
-	heart.style.pointerEvents="none";
-    if (navigator.appName=="Microsoft Internet Explorer") heart.style.filter="alpha(opacity=75)";
-    else heart.style.opacity=0.75;
-    heart.appendChild(document.createTextNode(String.fromCharCode(9829)));
-    document.body.appendChild(heart);
-    herz[i]=heart;
-	herzy[i]=false;
-  }
-  set_scroll();
   set_width();
-  herzle();
+  sparkle();
 }}
 
-function herzle() {
+function sparkle() {
   var c;
   if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
     ox=x;
     oy=y;
-    for (c=0; c<hearts; c++) if (herzy[c]===false) {
-	  herz[c].firstChild.nodeValue=String.fromCharCode(9829);
-      herz[c].style.left=(herzx[c]=x-minisize/2)+"px";
-      herz[c].style.top=(herzy[c]=y-minisize)+"px";
-      herz[c].style.fontSize=minisize+"px";
-	  herz[c].style.fontWeight='normal';
-      herz[c].style.visibility='visible';
-      herzs[c]=minisize;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
       break;
     }
   }
-  for (c=0; c<hearts; c++) if (herzy[c]!==false) blow_me_a_kiss(c);
-  setTimeout("herzle()", 40);
-}
-
-document.onmousedown=pucker;
-document.onmouseup=function(){clearTimeout(kiss);};
-
-function pucker() {
-  ox=-1;
-  oy=-1;
-  kiss=setTimeout('pucker()', 100);
-}
-
-function blow_me_a_kiss(i) {
-  herzy[i]-=herzs[i]/minisize+i%2;
-  herzx[i]+=(i%5-2)/5;
-  if (herzy[i]<sdown-herzs[i] || herzx[i]<sleft-herzs[i] || herzx[i]>sleft+swide-herzs[i]) {
-    herz[i].style.visibility="hidden";
-    herzy[i]=false;
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
   }
-  else if (herzs[i]>minisize+2 && Math.random()<.5/hearts) break_my_heart(i);
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
   else {
-    if (Math.random()<maxisize/herzy[i] && herzs[i]<maxisize) herz[i].style.fontSize=(++herzs[i])+"px";
-    herz[i].style.top=herzy[i]+"px";
-    herz[i].style.left=herzx[i]+"px";
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
   }
 }
 
-function break_my_heart(i) {
-  var t;
-  herz[i].firstChild.nodeValue=String.fromCharCode(9676);
-  herz[i].style.fontWeight='bold';
-  herzy[i]=false;
-  for (t=herzs[i]; t<=maxisize; t++) setTimeout('herz['+i+'].style.fontSize="'+t+'px"', 60*(t-herzs[i]));
-  setTimeout('herz['+i+'].style.visibility="hidden";', 60*(t-herzs[i]));
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
 }
 
 document.onmousemove=mouse;
@@ -110,6 +130,26 @@ function mouse(e) {
     set_scroll();
     y=event.y+sdown;
     x=event.x+sleft;
+  }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
   }
 }
 
@@ -137,34 +177,22 @@ function set_width() {
   shigh=sh_min;
 }
 
-window.onscroll=set_scroll;
-function set_scroll() {
-  if (typeof(self.pageYOffset)=='number') {
-    sdown=self.pageYOffset;
-    sleft=self.pageXOffset;
-  }
-  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
-    sdown=document.body.scrollTop;
-    sleft=document.body.scrollLeft;
-  }
-  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
-    sleft=document.documentElement.scrollLeft;
-    sdown=document.documentElement.scrollTop;
-  }
-  else {
-    sdown=0;
-    sleft=0;
-  }
-}
-
 function createDiv(height, width) {
   var div=document.createElement("div");
   div.style.position="absolute";
-  div.style.height=height;
-  div.style.width=width;
+  div.style.height=height+"px";
+  div.style.width=width+"px";
   div.style.overflow="hidden";
-  div.style.backgroundColor="transparent";
   return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
 }
 // ]]>
 </script>
