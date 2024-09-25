@@ -1,6 +1,6 @@
 <script type="text/javascript">
-// <![CDATA[
-var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+// I'm so gay.. I'm such a homosexual.. I love boys :fire: !!!
+var colour="random";
 var sparkles=50;
 
 /****************************
