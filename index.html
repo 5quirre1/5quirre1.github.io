@@ -22,21 +22,19 @@
             margin-bottom: -2px;
         }
         marquee {
-    color: rgb(175, 221, 144);
-    font-size: 20px;
-    font-style: italic;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-       #para1 {
+            color: rgb(175, 221, 144);
+            font-size: 20px;
+            font-style: italic;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #para1 {
            font-size: 1.5em;
            text-align: center;
            margin-top: -10px;
            color: aqua;
            transition: fade 0.5s ease-in-out;
-
        }
-       
-        h1 {
+       h1 {
             color: rgb(159, 192, 204);
         }
         .info {
@@ -51,7 +49,6 @@
             transition: transform 0.5s, box-shadow 0.5s; 
         }
         .info:hover {
-           
             transform: scale(1.03);
             box-shadow: #f0089f 0px 0px 10px;
             transition: 0.5s;
@@ -61,7 +58,6 @@
             font-size: 15px;
             text-align: center;
             color: rgb(245, 238, 243);
-            
         }
         .gif {
             width: 300px;
@@ -69,18 +65,81 @@
             margin-left: 250px;
         }
         a { 
-    color:rgb(229, 255, 0);
-    text-decoration:none;
+            color:rgb(229, 255, 0);
+            text-decoration:none;
+        }
+        a:hover, a:focus {
+            text-decoration:underline;
+            color:rgb(177, 227, 244);
+            transform: scale(1.1);
+        }
+    .carousel-button {
+    background-color: #c107b5;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
 }
-a:hover, a:focus {
-    text-decoration:underline;
-    color:rgb(177, 227, 244);
+.carousel-button:hover {
+    background-color: #f3ef14;
+    color: #0f000f;
     transform: scale(1.1);
+    transition: 0.5s;
+}
+#carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: 0px;
+}
+#carousel {
+    display: flex;
+    overflow: hidden;
+    width: 400px;
+}
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.carousel-images img {
+    width: 300px;
+    height: 190px;
+    cursor: pointer;
+}
 
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
 }
-a:hover {
-    color:rgb(177, 227, 244);
-    transform: scale(1.1);
+.modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 5px solid white;
+    border-radius: 10px;
+}
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#para3  {
+    text-align: center;
+    font-size: 20px;
+    color: rgb(245, 238, 243);
 }
 
         @media (max-width: 768px) {
@@ -102,35 +161,156 @@ a:hover {
             #para2 {
                 font-size: 13px;
             }
+            #para3 {
+              text-align: center;
+            }
             .gif {
                 width: 200px;
                 height: 200px;
                 margin-left: 50px;
             }
+            .carousel-button {
+                background-color: #c107b5;
+                color: white;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+                font-size: 18px;
+            }
+            .carousel-button:hover {
+                background-color: #f3ef14;
+                color: #0f000f;
+                transform: scale(1.1);
+                transition: 0.5s;
+            }
+            #carousel-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 5px;
+                margin-right: 0px;
+            }
+            #carousel {
+                display: flex;
+                overflow: hidden;
+                width: 400px;
+            }
+            .carousel-images {
+                display: flex;
+                transition: transform 0.5s ease;
+            }
+            .carousel-images img {
+                width: 240px;
+                height: 190px;
+                cursor: pointer;
+            }
        }
+       
     </style>
 </head>
 <body>
     <audio autoplay loop src="49 - Mii Maker - Editing a Mii Gamepad.mp3"></audio>
     <div class="info">
-<h1>Hi, I'm 5quirrel!</h1>
-<marquee>I'm extremely gay :3 | I'm 13 years old | He/Him | Grgegegegegegege</marquee>
-</marquee>
-<p id="para1">I really like to make websites, like a lot :3</p>
-<p id="para2">Placeholder :3</p>
-<img class="gif" src="https://media.tenor.com/VxOFHeeLONYAAAAi/boykisser-speech-bubble.gif" alt="gif" width="300" height="300">
-    </div>
+        <h1>Hi, I'm 5quirrel!</h1>
+        <marquee>I'm extremely gay :3 | I'm 13 years old | He/Him | Grgegegegegegege</marquee>
+        <p id="para1">About me!</p>
+        <p id="para2">I really like to make websites, like a lot :3 I know JavaScript, HTML, CSS and Java. There is a lot of other stuff that I'm learning and want to learn like phaser.js, PHP, Python, C++, ect. I own <a href="https://freakybob.site">Freakybob.site</a> and work on the Freakybob projects!</p>
+        <p id="para3">Some pictures of my friends and I's projects!</p>
+        <div id="carousel-container">
+          <button class="carousel-button" onclick="prevImage()">&#10094;</button>
+          <div id="carousel">
+              <div class="carousel-images" id="image-track">
+                  <img src="https://preview.redd.it/whats-your-favorite-boykisser-image-or-gif-3-v0-ry1v6af8s4md1.jpg?width=640&crop=smart&auto=webp&s=4b11e3a7392027d7143fde824fffcffbee90f20b" alt="Image 1">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo5n4jEBeDim5h36Mo5x35oSj4Vl0AElw2Fh22mnfKjHrmeupY1JM7d5Q_8x23lc38zAs&usqp=CAU" alt="Image 2">
+                  <img src="Snapshots/Aug 22.png" alt="Image 3">
+                  <img src="Snapshots/Aug 23.png" alt="Image 4">
+              </div>
+          </div>
+          <button class="carousel-button" onclick="nextImage()">&#10095;</button>
+      </div>
+  </div>
+<!--I FEEL SO FREAKY JUST LIKE FREAKYBOB!!!-->
+  <div id="image-modal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-image" src="" alt="Enlarged image">
+  </div>
+        
     <script type="text/javascript">
-// <![CDATA[
-var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+      function showInfo(id) {
+    var descriptionDiv = document.getElementById('description');
+    descriptionDiv.innerHTML = '';
+  
+    if (id) {
+      var para = document.createElement('p');
+      para.id = id;
+  
+      var messages = {
+        'point': 'Listen, you do not know how many times we hear this. The point of this website is just refering to the meme Freakybob and just having random ah features in the website :3',
+        'DouKnow': 'No, I do not.'
+      };
+  
+      para.textContent = messages[id] || 'Unknown message';
+      descriptionDiv.appendChild(para);
+  
+      var closeButton = document.createElement('button');
+      closeButton.textContent = 'Close';
+      closeButton.onclick = function() {
+        showInfo('');
+      };
+      descriptionDiv.appendChild(closeButton);
+    }
+    para.style.display = 'block';
+    descriptionDiv.scrollIntoView({ behavior: 'smooth' });
+  }
+let currentIndex = 0;
+const images = document.querySelectorAll('#image-track img');
+const totalImages = images.length;
+const modal = document.getElementById("image-modal");
+const modalImage = document.getElementById("modal-image");
+function updateCarousel() {
+    const imageTrack = document.getElementById('image-track');
+    const width = images[0].clientWidth;
+    imageTrack.style.transform = `translateX(-${currentIndex * width}px)`;
+}
+function nextImage() {
+    currentIndex = (currentIndex + 1) % totalImages;
+    updateCarousel();
+}
+function prevImage() {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    updateCarousel();
+}
+function openModal(src) {
+    modalImage.src = src;
+    modal.style.display = "flex";
+}
+function closeModal() {
+    modal.style.display = "none";
+}
+
+images.forEach(image => {
+    image.addEventListener('click', () => openModal(image.src));
+});
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+window.addEventListener('keydown', (event) => {
+    if (event.key === "Escape"
+        (event.key ===";")
+    ) {
+        closeModal();
+    }
+});
+window.addEventListener('resize', updateCarousel);
+
+var colour="random";
 var sparkles=50;
 
-/****************************
-*  Tinkerbell Magic Sparkle *
-*(c)2005-13 mf2fm web-design*
-*  http://www.mf2fm.com/rv  *
-* DON'T EDIT BELOW THIS BOX *
-****************************/
+
 var x=ox=400;
 var y=oy=300;
 var swide=800;
@@ -316,7 +496,7 @@ function newColour() {
   c.sort(function(){return (0.5 - Math.random());});
   return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
 }
-// ]]>
-</script>
+
+    </script>
 </body>
 </html>
